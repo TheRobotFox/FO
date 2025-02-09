@@ -1,0 +1,9 @@
+#+title: FO
+
+* Project
+** [X] Generate Random Graphs
+** [X] Enter Formular to constrain Graph
+** [X] Random collapse based on Contrains
+** [ ] Formula Feedback
+** [ ] Performance
+** KILL Graph viz <- Dependency
