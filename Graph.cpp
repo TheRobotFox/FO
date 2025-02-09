@@ -50,7 +50,7 @@ auto Graph::relax(float time) -> void
         int y =node.y/chunk_size;
 
         // center force
-        vec2f force = node.normalize()*-3;
+        vec2f force = node.normalize()*-(node.length()*node.length()/200000.F);
 
         // push force
         for(int y_offset=-1; y_offset<=1; y_offset++){

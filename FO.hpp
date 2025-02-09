@@ -4,7 +4,6 @@
 #include <concepts>
 #include <functional>
 #include <iostream>
-#include <memory>
 #include <string>
 #include <unordered_map>
 #include <variant>
@@ -30,12 +29,12 @@ struct Term
     std::string name;
     std::vector<Term<S>> data;
 
-    const T* eval(S &s, std::unordered_map<std::string, const T*> env) const
+    const T* eval(S &s, std::unordered_map<std::string, std::vector<const T*>> env) const
     {
         switch (type) {
             case VAR:
             {
-                if(env.contains(name)) return env[name];
+                if(env.contains(name)) return env[name].back();
                 if(s.constants.contains(name)) return s.constants[name];
 
                 std::cout << "Variable/Constant " << name << " not defined!";
@@ -85,15 +84,18 @@ struct Formula
         std::vector<Term<S>> terms;
     };
     std::variant<Formula<S>*, Q,J,Eq,Rel> data;
-    bool eval(S &s, std::unordered_map<std::string, const T*> env) const
+    bool eval(S &s, std::unordered_map<std::string, std::vector<const T*>> &env) const
     {
         switch (type) {
             case EXISTS:
             {
                 auto &q = std::get<1>(data);
                 for(T& e : s){
-                    env[q.var] = &e;
+                    if(!env.contains(q.var)) env[q.var] = {&e};
+                    else env[q.var].push_back(&e);
+
                     if(q.a->eval(s, env)) return true;
+                    env[q.var].pop_back();
                 }
                 return false;
             }
@@ -101,8 +103,10 @@ struct Formula
             {
                 auto &q = std::get<1>(data);
                 for(T& e : s){
-                    env[q.var] = &e;
+                    if(!env.contains(q.var)) env[q.var] = {&e};
+                    else env[q.var].push_back(&e);
                     if(!q.a->eval(s, env)) return false;
+                    env[q.var].pop_back();
                 }
                 return true;
             }

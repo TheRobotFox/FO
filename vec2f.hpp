@@ -40,6 +40,11 @@ public:
     {
         return (*this-other).length();
     }
+    static auto rand_dir() -> vec2f
+    {
+        float angle = (2*3.141592653589793*rand())/RAND_MAX;
+        return {.x=std::cos(angle), .y=std::sin(angle)};
+    }
 };
 
 
