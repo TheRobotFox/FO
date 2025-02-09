@@ -4,6 +4,23 @@
 - Parsing made with [[https://github.com/TheRobotFox/MLCC][MLCC]] (very WIP)
   [[file:img.png]]
 ** Usage
+- Press $TAB$ to spawn new Node-Clusters
+- Type in a Formula and hit $ENTER$ to set it
+- If a Formula has been set it will apply to random Nodes twice a second
+- You can use all the standard Logic operators they will be mapped to Unicode
+Heres a list of Inputs
+| Type         | Display           |
+|--------------+-------------------|
+| \e           | ∃                 |
+| \a           | ∀                 |
+| ->           | → (implication)   |
+| <->          | ↔                 |
+| !            | ¬                 |
+| &            | ∧                 |
+| \vert (pipe) | ∨                 |
+| =            | =                 |
+| E            | E (Edge Relation) |
+You can use parenthesis. Be careful the Quantifiers bind very tight.
 ** Compilation
 *** Raylib Project
 To Compile this Project you'll need the following
