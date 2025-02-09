@@ -37,7 +37,7 @@ MLCC is still in very early development so it's still a little hard to work with
 and the code generation has also been 'adjusted' for this project (mainly because MLCC does not have it's own lexer yet).
 If you're still up for it get it from [[https://github.com/TheRobotFox/MLCC][here]] (commit 8b8694f has most things set-up). Follow these steps:
 - Navigate =src/= Directory and open =main.rs=
-- inside =main:85=
+- on =main:85=
   #+begin_src rust
   let source = match read_to_string("fo.g") { // <-- Path to Grammarspec
         Ok(s) => s,
@@ -46,7 +46,7 @@ If you're still up for it get it from [[https://github.com/TheRobotFox/MLCC][her
         }
     };
   #+end_src
-- $main:137$
+- on =main:137=
   #+begin_src rust
 let output = reverseparse::export_cpp(&automaton); // <-- Code Generator (see reverseparse.rs)
     let mut file = match File::create("../FO/parse.cpp") { // <-- Code generation output Path
@@ -56,7 +56,7 @@ let output = reverseparse::export_cpp(&automaton); // <-- Code Generator (see re
     };
 
   #+end_src
-- Compile and run via src_sh[:exports code :eval never]{cargo run}
+- Compile and run via ~cargo run~
 
 After this the Parser should have been regenerated at the specified location, because MLCC does not currently have a built-in Lexer
 i have handcrafted one for very very basic use cases. It can
@@ -80,7 +80,7 @@ struct Token {
    ...
 #+end_src
 You can see the Regex ~[a-zA-Z]+~ is above ~Tok1~
-If you scroll down to the src_cpp[:exports code :eval never]{auto read_token(...) -> int} at the end, after the keyword matching there's this code
+If you scroll down to the ~auto read_token(...) -> int~ at the end, after the keyword matching there's this code
 #+begin_src cpp
     ...
     const auto *iter = str.begin();
