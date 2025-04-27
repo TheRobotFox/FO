@@ -11,7 +11,7 @@
 #include <vector>
 
 
-std::string charset = "φ¬↔→∧∨∀∃ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\\)(_,=-<>&|:";
+std::string charset = "φ¬↔→∧∨∀∃ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\\)(_,=-<>&|:!";
 char buff[512] = { 0 };
 int buff_len=0;
 
@@ -85,12 +85,12 @@ std::string& add_formatted(std::string &display, char c)
     } else if(display.ends_with("!")){
         display.pop_back();
         display.append("¬");
-    } else if(display.ends_with("->")){
-        display.pop_back(); display.pop_back();
-        display.append("→");
     } else if(display.ends_with("<->")){
         display.pop_back(); display.pop_back(); display.pop_back();
         display.append("↔");
+    } else if(display.ends_with("->")){
+        display.pop_back(); display.pop_back();
+        display.append("→");
     }
     return display;
 };
@@ -160,6 +160,7 @@ auto main(int argc, char **argv) -> int
             }
         }
         if(IsKeyPressed(KEY_BACKSPACE)&&buff_len>0){
+            text_color = WHITE;
             buff[--buff_len] = 0;
             display = "φ(x):=";
             for(int i=0; i<buff_len; i++) add_formatted(display, buff[i]);
